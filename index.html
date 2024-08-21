@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Chess Board</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2.5em;
+            color: #333;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+            margin: 0 0 20px 0; /* Margin on the bottom only to add space between heading and chessboard */
+        }
+
+        .chessboard {
+            display: grid;
+            grid-template-columns: repeat(8, 1fr);
+            grid-template-rows: repeat(8, 1fr);
+            width: 80vmin;
+            height: 80vmin;
+            max-width: 90vw;
+            max-height: 90vh;
+            border: 5px solid #333;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .chessboard span {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: calc(1.5vmin + 1.5vmax);
+            font-weight: bold;
+        }
+
+        .chessboard .white {
+            background-color: #fff;
+            color: #333;
+        }
+
+        .chessboard .black {
+            background-color: #333;
+            color: #fff;
+        }
+
+        @media (max-width: 600px) {
+            .chessboard {
+                width: 95vmin;
+                height: 95vmin;
+            }
+
+            .chessboard span {
+                font-size: calc(1.5vmin + 1vmax);
+            }
+        }
+
+        @media (max-width: 400px) {
+            .chessboard {
+                width: 100vmin;
+                height: 100vmin;
+            }
+
+            .chessboard span {
+                font-size: calc(1.2vmin + 0.8vmax);
+            }
+        }
+    </style>
+</head>
+<body>
+
+<h1>CHESSBOARD</h1>
+<div class="chessboard" id="chessboard"></div>
+
+<script>
+    function print(data, className) {
+        const label = document.createElement("span");
+        label.textContent = data;
+        label.className = className;
+        document.getElementById("chessboard").appendChild(label);
+    }
+
+    function createChessBoard() {
+        const board_size = 8;
+        for (let i = 0; i < board_size; i++) {
+            for (let j = 0; j < board_size; j++) {
+                if ((i + j) % 2 === 0) {
+                    print("*", "white");
+                } else {
+                    print("#", "black");
+                }
+            }
+        }
+    }
+
+    createChessBoard();
+</script>
+
+</body>
+</html>
